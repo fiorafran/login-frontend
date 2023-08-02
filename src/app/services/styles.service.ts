@@ -14,42 +14,29 @@ export class StylesService {
       outgoingText: '#ffffff',
       background: '#ffffff',
     },
-    fontsOptions: [
-      { label: "Robot", value: "Roboto" },
-      { label: "Monospace", value: "monospace" },
-      { label: "Arial", value: "Arial" },
-      { label: "Helvetica", value: "Helvetica" },
-      { label: "Sans serif", value: "sans-serif" }
-    ],
-    fontsSizes: [
-      '10px',
-      '12px',
-      '13px',
-      '14px',
-      '15px',
-      '16px'
-    ]
+    font: 'Roboto',
+    fontSize: '16px'
   };
 
   getColors = () => {
     return this.styles.color;
   }
 
-  getFonts = () => {
-    return this.styles.fontsOptions;
+  getFont = () => {
+    return this.styles.font;
   }
-  getFontsSizes = () => {
-    return this.styles.fontsSizes;
+  getFontSize = () => {
+    return this.styles.fontSize;
   }
 
   setColors(newStyles: any) {
     this.styles.color = { ...this.styles.color, ...newStyles }
   }
-  setFonts(newStyles: any) {
-    this.styles.fontsOptions = { ...this.styles.fontsOptions, ...newStyles }
+  setFont(newFont: any) {
+    this.styles.font = newFont
   }
-  setFontsSizes(newStyles: any) {
-    this.styles.fontsSizes = { ...this.styles.fontsSizes, ...newStyles }
+  setFontSize(size: any) {
+    this.styles.fontSize = size 
   }
 
 }

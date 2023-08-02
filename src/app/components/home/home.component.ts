@@ -11,8 +11,20 @@ import { StylesService } from 'src/app/services/styles.service';
 export class HomeComponent {
   constructor(private authService: AuthService, private router: Router, private stylesService: StylesService) { }
 
-  get styles() {
+  get stylesColors() {
     return this.stylesService.getColors();
+  }
+  get font() {
+    return this.stylesService.getFont();
+  }
+  get fontSize() {
+    return this.stylesService.getFontSize();
+  }
+  set font(size: string) {
+    this.updateFont(size);
+  }
+  set fontSize(size: string) {
+    this.updateFontSize(size);
   }
 
   colors = [
@@ -25,8 +37,31 @@ export class HomeComponent {
     { label: 'Fondo', prop: 'background' },
   ];
 
-  updateStyles = (prop: string, value: string) => {
+  fontsOptions = [
+    "Roboto",
+    "monospace",
+    "Arial",
+    "Helvetica",
+    "sans-serif"
+  ]
+
+  fontsSizes = [
+    '11px',
+    '12px',
+    '13px',
+    '14px',
+    '15px',
+    '16px'
+  ]
+
+  updateColors = (prop: string, value: string) => {
     this.stylesService.setColors({ [prop]: value });
+  }
+  updateFont = (newFont: string) => {
+    this.stylesService.setFont(newFont);
+  }
+  updateFontSize = (size: string) => {
+    this.stylesService.setFontSize(size);
   }
 
   closeSession = () => {

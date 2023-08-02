@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -6,12 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./select.component.css']
 })
 export class SelectComponent {
-  options = [
-    { label: "Robot", value: "Roboto" },
-    { label: "Monospace", value: "monospace" },
-    { label: "Arial", value: "Arial" },
-    { label: "Helvetica", value: "Helvetica" },
-    { label: "Sans serif", value: "sans-serif" },
-  ]
+  @Input() selected: string = '';
+  @Input() options: string[] = [];
+  @Output() selectedChange = new EventEmitter<string>();
 
 }
