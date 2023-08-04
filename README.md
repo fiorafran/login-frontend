@@ -30,4 +30,4 @@ Para poder usar el login o el signup necesitamos la API del [backend](https://gi
 Consultar.
 
 ## ENVs
-Consultar.
+Se encuentran en `src/environments`.
