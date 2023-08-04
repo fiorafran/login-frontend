@@ -14,6 +14,20 @@ import { Router } from '@angular/router';
 export class LogInComponent {
   constructor(private loginService: LoginService, private signUpService: SignupService, private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
+  full = ''
+  isFocused = {
+    fullName: false,
+    email: false,
+    pass: false
+  }
+
+  onFocus(prop: string) {
+    this.isFocused = { ...this.isFocused, [prop]: true };
+  }
+  onBlur(prop: string) {
+    this.isFocused = { ...this.isFocused, [prop]: false };
+  }
+
   ngOnInit(): void {
     const isLoggedIn = this.authService.isLoggedIn()
 
@@ -40,21 +54,23 @@ export class LogInComponent {
 
   type = 'login';
 
+  isLoading = false;
 
   changeType(value: string) {
     this.type = value
 
     if (this.type === 'signup') {
       this.fullName.setValidators(Validators.required);
-      this.password.setValidators([Validators.required,Validators.pattern(/^(?=.*\d).{8,}$/)])
+      this.password.setValidators([Validators.required, Validators.pattern(/^(?=.*\d).{8,}$/)])
     }
     else {
       this.password.removeValidators(Validators.pattern(/^(?=.*\d).{8,}$/));
       this.fullName.clearValidators();
     }
-
     this.fullName.updateValueAndValidity();
     this.password.updateValueAndValidity();
+    this.userForm.reset();
+    this.errorMessage = ''
   }
 
   getErrorMessage(control: FormControl | null): string {
@@ -65,12 +81,28 @@ export class LogInComponent {
     return ''
   }
 
+  errorMessage = ''
+
   logIn() {
-    this.loginService.login(this.email.value, this.password.value).subscribe((res) => { console.log({ res }) });
+    this.isLoading = true
+    this.loginService.login(this.email.value, this.password.value).subscribe({
+      next: (res) => { this.isLoading = false },
+      error: (err) => {
+        this.errorMessage = err
+        this.isLoading = false
+      }
+    });
   }
 
   register() {
-    this.signUpService.signup(this.fullName.value, this.email.value, this.password.value).subscribe((sign) => { console.log({ sign }) });
+    this.isLoading = true
+    this.signUpService.signup(this.fullName.value, this.email.value, this.password.value).subscribe({
+      next: (res) => { this.isLoading = false },
+      error: (err) => {
+        this.errorMessage = err
+        this.isLoading = false
+      }
+    });
   }
 
   onSubmit() {
@@ -79,7 +111,5 @@ export class LogInComponent {
     }
 
     return this.register();
-
   }
-
 }

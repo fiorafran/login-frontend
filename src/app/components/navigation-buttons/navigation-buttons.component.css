@@ -1,0 +1,31 @@
+.section {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding-left: 30px;
+  @media screen and (max-width: 768px) {
+    padding-left: 5px;
+  }
+}
+
+.section__button {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  color: #d8d9d9;
+  font-size: 17px;
+  gap: 8px;
+  text-transform: capitalize;
+  cursor: pointer;
+  transition: color .2s ease-in;
+  & img {
+    width: 18px;
+  }
+  @media screen and (max-width: 768px) {
+    font-size: 13px;
+  }
+}
+.section__button:hover {
+  color: var(--primary);
+}

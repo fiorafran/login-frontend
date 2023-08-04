@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  & label {
+    color: var(--text);
+  }
+  & input {
+    appearance: none;
+    cursor: pointer;
+    border: none;
+    width: 27px;
+    height: 30px;
+    padding: 0;
+  }
+}

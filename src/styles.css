@@ -4,10 +4,12 @@
 :root {
   --primary: #ffffff;
   --secondary: #2e2f40;
-  --tertiary: #58ece9;
+  --tertiary: #7eb8ba;
+  --text: #535353;
+  --error: #ff0000b0;
 }
 
 body {
   margin: 0;
-  font-family: "Roboto";
+  font-family: 'Roboto', sans-serif;
 }

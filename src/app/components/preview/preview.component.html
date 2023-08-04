@@ -1,0 +1,26 @@
+<div class="chat chat--window" [ngStyle]="{ 'background-color': color.background }">
+    <div class="chat chat__header" [ngStyle]="{ 'background-color': color.headboardBg }">
+        <div class="header__item">
+            <app-bubble [size]="20" />
+            <span [ngStyle]="{ 'color': color.headboardText }">Hey Now</span>
+        </div>
+    </div>
+    <div class="chat__content">
+        <div class="chat chat__bubble--person" [ngStyle]="getBubbleStyles('person')">
+            <span>hola! quisiera saber a qué se dedican</span>
+        </div>
+        <div class="chat chat__bubble--bot" *ngFor="let msg of chatbotMessages" [ngStyle]="getBubbleStyles('bot')">
+            <span>{{msg}}</span>
+        </div>
+    </div>
+    <div class="chat chat__inputs">
+        <img class="menu" src="assets/menu.png"/>
+        <input class="input--text" type="text" [ngStyle]="{ 'font-family': font, 'font-size': fontSize }"/>
+        <button class="input input--send">
+            <img src="assets/send.png"/>
+        </button>
+        <button class="input input--file">
+            <img src="assets/attach.png"/>
+        </button>
+    </div>
+</div>

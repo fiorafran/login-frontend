@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { StylesService } from 'src/app/services/styles.service';
 
@@ -9,7 +10,20 @@ import { StylesService } from 'src/app/services/styles.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  constructor(private authService: AuthService, private router: Router, private stylesService: StylesService) { }
+  bubbleX = {}
+  bubbleY = {}
+  bubble = {}
+  private stylesSubscription: Subscription;
+
+  constructor(private authService: AuthService, private router: Router, private stylesService: StylesService, private changeDetectorRef: ChangeDetectorRef) {
+    this.stylesSubscription = this.stylesService.stylesChanged.subscribe((styles) => {
+      this.bubble = styles.bubble;
+    });
+  }
+
+  ngOnDestroy() {
+    this.stylesSubscription.unsubscribe();
+  }
 
   get stylesColors() {
     return this.stylesService.getColors();
@@ -41,8 +55,11 @@ export class HomeComponent {
     "Roboto",
     "monospace",
     "Arial",
-    "Helvetica",
-    "sans-serif"
+    "Courier New",
+    "sans-serif",
+    "Times New Roman",
+    "Georgia",
+    "Verdana"
   ]
 
   fontsSizes = [
@@ -54,6 +71,11 @@ export class HomeComponent {
     '16px'
   ]
 
+  image = '/assets/arrow.png'
+  imageActive = '/assets/arrowWhite.png'
+  leftOrRight = 'right'
+  topOrBottom = 'bottom'
+
   updateColors = (prop: string, value: string) => {
     this.stylesService.setColors({ [prop]: value });
   }
@@ -63,9 +85,29 @@ export class HomeComponent {
   updateFontSize = (size: string) => {
     this.stylesService.setFontSize(size);
   }
+  updateBubble = (newStyles: object) => {
+    this.stylesService.setBubble(newStyles);
+  }
 
   closeSession = () => {
     this.authService.logout();
     this.router.navigateByUrl('/login');
   }
+
+  setLeftOrRight = (value: string) => {
+    this.leftOrRight = value
+    if (value === 'left') this.bubbleX = { left: 0 }
+    if (value === 'right') this.bubbleX = { right: 0 }
+    this.updateBubble({ ...this.bubbleX, ...this.bubbleY });
+  }
+  setTopOrBottom = (value: string) => {
+    this.topOrBottom = value
+    if (value === 'top') this.bubbleY = { top: 0 }
+    if (value === 'bottom') this.bubbleY = { bottom: 0 }
+    this.updateBubble({ ...this.bubbleX, ...this.bubbleY });
+  }
+  getImage = (button: string) => {
+    return (button === this.leftOrRight || button === this.topOrBottom) ? this.imageActive : this.image
+  }
+
 }

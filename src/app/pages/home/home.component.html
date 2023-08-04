@@ -1,0 +1,76 @@
+<div class="home">
+	<nav class="navbar">
+		<app-navigation-buttons />
+		<div class="navbar--right">
+			<img src="assets/user.png" class="icon" />
+			<img src="assets/fullscreen.png" class="icon" />
+			<img src="assets/logout.png" class="icon" (click)="closeSession()" />
+		</div>
+	</nav>
+	<section class="container__grid">
+		<div class="item item--left">
+			<div class="item__top">
+				<div class="wrapper__top">
+					<img src="assets/chatSquare.png" />
+					<h3>Nombre_Skin_1</h3>
+					<img src="assets/edit.png" />
+				</div>
+				<button class=" button">Descargar CSS</button>
+			</div>
+			<div class="item__content">
+				<div class="container">
+					<app-title-subtitle class="component" [title]="'Posición'"
+						[subtitle]="'Ubicacion del webchat en la pantalla'" />
+					<div class="wrapper">
+						<button class="button--arrow left" (click)="setLeftOrRight('left')" [class.active]="leftOrRight === 'left'">
+							<img [src]="getImage('left')" />
+						</button>
+						<button class="button--arrow right" (click)="setLeftOrRight('right')"
+							[class.active]="leftOrRight === 'right'">
+							<img [src]="getImage('right')" />
+						</button>
+					</div>
+					<div class="wrapper">
+						<button class="button--arrow top" (click)="setTopOrBottom('top')" [class.active]="topOrBottom === 'top'">
+							<img [src]="getImage('top')" />
+
+						</button>
+						<button class="button--arrow bottom" (click)="setTopOrBottom('bottom')"
+							[class.active]="topOrBottom === 'bottom'">
+							<img [src]="getImage('bottom')" />
+
+						</button>
+					</div>
+					<div class="wrapper">
+						<span>({{leftOrRight}} {{topOrBottom}})</span>
+					</div>
+				</div>
+
+				<div class="container">
+					<app-title-subtitle class="component" [title]="'Colores'" [subtitle]="'Seleccione los colores del webchat'" />
+					<div class="container__colors">
+						<app-color-picker *ngFor="let color of colors" [(color)]="stylesColors[color.prop]"
+							(colorChange)="updateColors(color.prop, $event)" [label]="color.label" />
+					</div>
+				</div>
+
+				<div class="container">
+					<app-title-subtitle class="component" [title]="'Fuentes'"
+						[subtitle]="'Configura la tipografia y el tamaño de los textos'" />
+					<app-select class="component" [(selected)]="font" [options]="fontsOptions"
+						(selectedChange)="updateFont($event)" [style]="'width: 260px; margin-right: 15px;'" />
+					<app-select class="component" [(selected)]="fontSize" [options]="fontsSizes"
+						(selectedChange)="updateFontSize($event)" [style]="'width: 90px;'" />
+				</div>
+
+			</div>
+			<div class="item__footer">
+				<button class="button button--save">Guardar</button>
+			</div>
+		</div>
+		<div class="item item--right">
+			<app-preview />
+			<app-bubble class="bubble" [ngStyle]="bubble" />
+		</div>
+	</section>
+</div>

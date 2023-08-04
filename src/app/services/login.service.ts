@@ -6,12 +6,13 @@ import { CookieService } from 'ngx-cookie-service';
 import { LoginResponse } from '../models/login.model';
 import { AuthService } from './auth.service'
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private apiUrl = 'http://localhost:3000/api/auth/login'
+  private apiUrl = `${environment.backend}/api/auth/login`
 
   constructor(private http: HttpClient, private cookieService: CookieService, private authService: AuthService, private router: Router) { }
 
@@ -20,7 +21,7 @@ export class LoginService {
 
     return this.http.post<LoginResponse>(this.apiUrl, data).pipe(
       tap(({ token }) => {
-        console.log('Inicio de sesion exitoso ', token)
+        console.log('Inicio de sesion exitoso ')
 
         const expirationDate = this.authService.getTokenExpirationDate(token)
 
@@ -35,8 +36,7 @@ export class LoginService {
       }),
       catchError(error => {
         console.log('Error en inicio de sesion ', error)
-
-        throw new Error(error)
+        throw new Error(error.error.message)
       })
     );
   }
