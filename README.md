@@ -24,10 +24,7 @@ Una vez instaladas, correr el comando `ng serve` para levantar el proyecto. El p
 
 ## Extras
 
-Para poder usar el login o el signup necesitamos la API del [backend](https://github.com/fiorafran/login-backend)
-
+Para poder usar el login o el signup necesitamos la API del [backend](https://github.com/fiorafran/login-backend) que se encuentra en `src/environments`.
 ## Usuarios de ejemplo
 Consultar.
 
-## ENVs
-Se encuentran en `src/environments`.
