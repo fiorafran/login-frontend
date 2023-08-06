@@ -1,27 +1,30 @@
 # ChallengeHeynow
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.1.6.
+Bueno primero que nada agredecerles por su tiempo y por esta tremenda oportunidad. Muchisimas gracias. 
 
-## Development server
+## Pasos de instalación
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Clonar el repo.
 
-## Code scaffolding
+`git clone https://github.com/fiorafran/login-frontend.git`
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+---
+Una vez clonado, entrar en la carpeta del repo.
 
-## Build
+`cd login-frontend`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
+Instalar las dependencias
 
-## Running unit tests
+`npm i || npm install`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+---
 
-## Running end-to-end tests
+Una vez instaladas, correr el comando `ng serve` para levantar el proyecto. El proyecto se levanta en la siguiente url: http://localhost:4200/
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Extras
 
-## Further help
+Para poder usar el login o el signup necesitamos la API del [backend](https://github.com/fiorafran/login-backend) que se encuentra en `src/environments`.
+## Usuarios de ejemplo
+Consultar.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
